@@ -1,0 +1,10 @@
+*.logs
+__pycache__
+extras/*
+PDFs/*
+*.rdb
+test.py
+*.log
+.ipynb_checkpoints/*
+utils/conversation_history.db
+conversation_history.db
