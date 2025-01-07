@@ -114,7 +114,7 @@ Copy the code inside the container and the steps to run the code remains the sam
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [GPL-3.0 License](LICENSE).
 
 ---
 
