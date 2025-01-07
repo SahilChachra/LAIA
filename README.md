@@ -20,7 +20,7 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
 
 ---
 
-## Some Screenshots
+## 🌠 Screenshots
 
 ![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/main/images/LAIA_SS_1.png)
 
