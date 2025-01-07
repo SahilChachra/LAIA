@@ -20,6 +20,15 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
 
 ---
 
+## Some Screenshots
+
+![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/[branch]/LAIA_SS_1.png?raw=true)
+
+![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/[branch]/LAIA_SS_1.pn2?raw=true)
+
+
+---
+
 ## 🧠 Models Used
 #### Memory usage details :
 - **Base Load**: 3.5 GB
