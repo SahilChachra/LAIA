@@ -22,9 +22,9 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
 
 ## Some Screenshots
 
-![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/[branch]/LAIA_SS_1.png?raw=true)
+![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/main/images/LAIA_SS_1.png)
 
-![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/[branch]/LAIA_SS_1.pn2?raw=true)
+![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/main/images/LAIA_SS_2.png)
 
 
 ---
