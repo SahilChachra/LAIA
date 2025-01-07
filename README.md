@@ -1,12 +1,16 @@
 # LAIA - Language AI Advisor 📚🤖
 
-Welcome to **LAIA** (Language AI Advisor), your academic AI companion designed to revolutionize the way you study and learn!
+Welcome to **LAIA** (Language AI Advisor), your modular AI companion!
 
 ---
 
+## 📋 Description
+
+LAIA (Language AI Advisor) is a modular server built using Large Language Models (LLMs) with tools for PDF-based Retrieval-Augmented Generation (RAG), web search, and conversation history management. The project aims to create a flexible and scalable framework for integrating various AI tools as needed.
+
 ## 💡 Design Philosophy
 
-The goal behind this project was to build an **LLM server with agents** that is:
+The goal behind this project was to build an **LLM server with custom agents** that is:
 
 1. **Open and Flexible**: Designed to avoid dependencies on specific models or libraries, making it highly adaptable to various use cases.  
 2. **Modular Architecture**: The code is structured to be as modular as possible, allowing it to serve as a foundational base for similar projects or future extensions.  
@@ -17,10 +21,18 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
 ---
 
 ## 🧠 Models Used
-
-1. **Llama-3.2-3B-instruct_Q8.gguf**: Primary LLM used to generate responses.  
+#### Memory usage details :
+- **Base Load**: 3.5 GB
+  - Includes 2 instances of SmolLMv2 and 1 instance of Llama-3.2-3B-instruct_Q8.gguf
+- **Ingestion Process**: 5 GB
+  - Required during `/ingest` operations for vector database and re-ranking models
+- **Peak Usage**: 5.8 GB
+  - Observed during response generation
+- **Generation Speed**: ~18 tokens/second
+#### Models
+1. **[Llama-3.2-3B-instruct_Q8.gguf](https://huggingface.co/bartowski/Llama-3.2-3B-Instruct-GGUF)**: Primary LLM used to generate responses.  
 2. **thenlper/gte-small**: Embedding model for creating vectorized representations in the vector store (**ChromaDB**).  
-3. **SmolLMv2-360M-instruct**: Lightweight LLM used to filter and select relevant outputs from **ChromaDB**.  
+3. **SmolLMv2-360M-instruct**: Lightweight LLM used to filter and select relevant outputs from **ChromaDB** and also to summarize data.  
 4. **BAAI/bge-small-en**: Cross-encoder used for re-ranking documents for precision in final outputs.  
 
 ---
@@ -34,7 +46,7 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
    - **Cross-Encoder Reranker**: Re-ranks documents for precision using **BAAI/bge-small-en**, fine-tuning results for accuracy.  
 
 2. **Web Search Integration**:  
-   Combines knowledge from web searches and local PDFs, allowing it to synthesize rich and well-rounded answers for user queries.
+   Combines knowledge from web searches and local PDFs, allowing it to write well-rounded answers for user queries.
 
 3. **Powered by Cutting-Edge LLMs**:  
    - Utilizes the **Llama-3.2-3B-Instruct-Q8_0.gguf model** to generate detailed and insightful answers.  
@@ -44,9 +56,6 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
    - Built with **Langchain** for seamless integration of components.  
    - Uses **Redis** for asynchronous request handling, enabling batch inference and improving responsiveness.  
    - Deployed using **FastAPI** and **Gunicorn**, ensuring scalable and robust performance.
-
-5. **Academic Focus**:  
-   Tailored to students and researchers, LAIA simplifies the process of extracting meaningful knowledge from vast resources.
 
 ---
 
@@ -61,8 +70,6 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
 ---
 
 ## 💻 Setup and Usage
-
-Follow these simple steps to get started with LAIA:
 
 ### 1. Installation
 Clone this repository and install the required dependencies:
@@ -89,23 +96,18 @@ Launch the server, Redis, and the worker in separate terminals:
     python3 worker.py
     ```
 
-## 🎓 Why Choose LAIA?
+### Better approach
+Pull an image from Nvidia with CUDA preinstalled with Ubuntu 22.04. Install PyTorch with CUDA, Llamacpp with CUDA support and relevant packages from requirements. It's a bit tricky to setup but carries a huge learning curve.
 
-- **Comprehensive Knowledge**: Combines the power of web search with textbook-level PDF analysis.  
-- **Efficient Multi-User Handling**: Redis ensures smooth and scalable performance, even with multiple simultaneous users.  
-- **Advanced Retrieval**: The multi-level filtering in RAG guarantees the highest quality and most relevant information.  
-- **Scalability & Performance**: Deployed using Gunicorn and FastAPI for high availability and robust handling of requests.  
-- **Designed for Academics**: Whether you're studying for exams or conducting research, LAIA delivers concise and accurate answers.  
-
+Copy the code inside the container and the steps to run the code remains the same.
 ---
 
 ## 🛠️ Future Roadmap
-
-- **Improved PDF handling**: Improve the way PDFs are being loaded and ingest in the vector database. 
-- **Improved Language Model Support**: Add more advanced LLMs for broader language capabilities.  
-- **Fine-Tuned Reranking**: Incorporate more efficient cross-encoders for faster processing.  
+ 
+- **Improved Language Model Support**: Add more advanced LLMs for broader language capabilities.    
 - **Expanded File Support**: Add support for different file types, including PowerPoint presentations and spreadsheets.  
-- **UI Development**: Build a user-friendly web interface to enhance accessibility.  
+- **UI Development**: Build a user-friendly web interface to enhance accessibility.
+- **Code Parsers**: Add code parsers to handle Python/C++ code as output
 
 ---
 
