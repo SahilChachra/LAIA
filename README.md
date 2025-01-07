@@ -100,6 +100,7 @@ Launch the server, Redis, and the worker in separate terminals:
 Pull an image from Nvidia with CUDA preinstalled with Ubuntu 22.04. Install PyTorch with CUDA, Llamacpp with CUDA support and relevant packages from requirements. It's a bit tricky to setup but carries a huge learning curve.
 
 Copy the code inside the container and the steps to run the code remains the same.
+
 ---
 
 ## 🛠️ Future Roadmap
