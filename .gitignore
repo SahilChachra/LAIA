@@ -8,3 +8,4 @@ test.py
 .ipynb_checkpoints/*
 utils/conversation_history.db
 conversation_history.db
+.env

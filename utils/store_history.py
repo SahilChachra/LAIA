@@ -1,5 +1,8 @@
 import sqlite3
 from datetime import datetime
+from loguru import logger
+
+logger.add("./logs/store_history.log", rotation="10 MB")
 
 class ConversationDatabase:
     def __init__(self, db_file="conversation_history.db"):
@@ -72,10 +75,10 @@ class ConversationDatabase:
         with self._get_connection() as conn:
             conn.execute(query)
             conn.commit()
-            print("All records have been cleared, table structure retained.")
+            logger.info("All records have been cleared, table structure retained.")
 
 
-# Example usage
+# For testing
 if __name__ == "__main__":
     db = ConversationDatabase()
 

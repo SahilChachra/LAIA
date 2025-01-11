@@ -100,12 +100,13 @@ class LLM:
                 """
                 <|begin_of_text|>
                 <|start_header_id|>system<|end_header_id|>
-                Provide a concise answer to the following question using best of your knowledge. You can also refer to the below history and external knowledge.
+                You are assisting users with their queries and questions.
+                Refer to the below conversation history, external knowledge given below and the best of your knowledge to answer the questions. 
 
                 Conversation history
                 {history}
 
-                Data from other sources as external knowledge :
+                External knowledge:
                 {context}
                 <|eot_id|>
                 <|start_header_id|>user<|end_header_id|>
@@ -172,7 +173,7 @@ def main():
         "What are the main causes of climate change?"
     ]
     history = [
-        "Assistant : Hi! How are you User: Hi! I am good",
+        "",
         "Assistant : Hi! How are you User: Hi! I am good",
         "Assistant : Hi! How are you User: Hi! I am good",
         ""

@@ -91,7 +91,6 @@ class HuggingFaceSummarizerLLM:
         self.device = device
         self.tokenizer = AutoTokenizer.from_pretrained(checkpoint)
         self.model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
-        logger.info(f"HuggingFaceSummarizerLLM initialized with checkpoint: {checkpoint}")
         
     def clean_output(self, text: str) -> str:
         """

@@ -20,6 +20,16 @@ from utils.process_text_data import process_data
 from utils.store_history import ConversationDatabase
 from utils.utility_models import HuggingFaceSummarizerLLM
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+try:
+    serper_api_key = os.getenv("SERPER_API_KEY")
+    logger.success("SERPER_API_KEY found")
+except Exception as e:
+    logger.error("Couldn't load SERPER_API_KEY from .env file! Please re-verify!")
+
 # Configure logging
 logger.add("./logs/server.log", rotation="10 MB")
 
@@ -36,13 +46,17 @@ except:
 
 try:
     history_summarizer = HuggingFaceSummarizerLLM(checkpoint="HuggingFaceTB/SmolLM2-360M-Instruct", device="cuda")
-    logger.success("History summarizer model loaded successfully!")
+    logger.success("Conversation History summarizer model loaded successfully!")
 except:
     logger.warning("History summarizer model failed to load!")
 
 
 # Declare tools as global
-web_search_tool = WebSearchTool(api_key="")
+try:
+    web_search_tool = WebSearchTool(api_key=serper_api_key)
+    logger.success("Web Search tool created successfully!")
+except Exception as e:
+    logger.error("Error creating Web Search tool : {e}")
 pdf_retrieval_tools: Dict[str, object] = {}
 
 # ReRanker model
@@ -54,6 +68,8 @@ app = FastAPI(
     description="Real-time inference service with Redis queue management",
     version="1.0.0"
 )
+
+logger.success("All settings completed. Starting App...")
 
 # Request model for input validation
 class InferenceRequest(BaseModel):
@@ -103,10 +119,11 @@ async def infer_text(request: InferenceRequest, pdf_retrieval_tool: object = Dep
         # Clean the input question
         question = process_data(request.question)
 
-        # Use PDF RAG
-        
         retrieval_results = ""
         web_search_results = ""
+
+        if (not request.use_pdf_rag) and (not request.use_web_search):
+            logger.warning(f"Request {request.request_id} - Both RAG and Web seach tools are disabled! Model will generate answer from its own knowledge!")
 
         if request.use_pdf_rag:
             try:
@@ -123,7 +140,7 @@ async def infer_text(request: InferenceRequest, pdf_retrieval_tool: object = Dep
         # Fetch conversation history
         history = db_history.fetch_history(request.user_id)
         if not history:
-            history = "No history yet. Its a new conversation."
+            history = ""
         else:
             try:
                 history = history_summarizer(history)

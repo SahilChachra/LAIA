@@ -28,7 +28,7 @@ class WebSearchTool:
         # Use the provided HuggingFaceSummarizerLLM instance for summarization
         try:
             self.summarizer = HuggingFaceSummarizerLLM(checkpoint="HuggingFaceTB/SmolLM2-360M-Instruct", device="cuda")
-            logger.success("HuggingFaceSummarizerLLM model loaded!")
+            logger.success("Web Search Summarizer - HuggingFaceSummarizerLLM model loaded!")
         except:
             self.summarizer = None
             logger.warning("HuggingFaceSummarizerLLM couldn't be loaded!")

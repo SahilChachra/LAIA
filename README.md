@@ -24,13 +24,13 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
 
 ![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/main/images/LAIA_SS_1.png)
 
-![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/main/images/LAIA_SS_2.png)
+![Screenshot 2](https://github.com/SahilChachra/LAIA/blob/main/images/LAIA_SS_2.png)
 
 
 ---
 
-## 🧠 Models Used
-#### Memory usage details :
+## 🧠 Models Details
+### Memory usage details :
 - **Base Load**: 3.5 GB
   - Includes 2 instances of SmolLMv2 and 1 instance of Llama-3.2-3B-instruct_Q8.gguf
 - **Ingestion Process**: 5 GB
@@ -38,11 +38,13 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
 - **Peak Usage**: 5.8 GB
   - Observed during response generation
 - **Generation Speed**: ~18 tokens/second
-#### Models
+### Models
 1. **[Llama-3.2-3B-instruct_Q8.gguf](https://huggingface.co/bartowski/Llama-3.2-3B-Instruct-GGUF)**: Primary LLM used to generate responses.  
 2. **thenlper/gte-small**: Embedding model for creating vectorized representations in the vector store (**ChromaDB**).  
 3. **SmolLMv2-360M-instruct**: Lightweight LLM used to filter and select relevant outputs from **ChromaDB** and also to summarize data.  
 4. **BAAI/bge-small-en**: Cross-encoder used for re-ranking documents for precision in final outputs.  
+### Model path
+I had place the Llama-3.2-3B-instruct model in the parent folder of LAIA. You can do the same or update the path in ```worker.py```'s main() accordingly. 
 
 ---
 
@@ -55,7 +57,7 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
    - **Cross-Encoder Reranker**: Re-ranks documents for precision using **BAAI/bge-small-en**, fine-tuning results for accuracy.  
 
 2. **Web Search Integration**:  
-   Combines knowledge from web searches and local PDFs, allowing it to write well-rounded answers for user queries.
+   Combines knowledge from web searches allowing it to write well-rounded answers for user queries.
 
 3. **Powered by Cutting-Edge LLMs**:  
    - Utilizes the **Llama-3.2-3B-Instruct-Q8_0.gguf model** to generate detailed and insightful answers.  
@@ -67,6 +69,13 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
    - Deployed using **FastAPI** and **Gunicorn**, ensuring scalable and robust performance.
 
 ---
+
+## Flow Charts (Build using lucid.app)
+
+### Web Seach Flow
+![Web Search flow](https://github.com/SahilChachra/LAIA/blob/main/images/WebSearchToolFlowChart.png)
+
+### RAG flow
 
 ## 🛠️ Technologies Used
 
@@ -87,6 +96,12 @@ Clone this repository and install the required dependencies:
 git clone https://github.com/yourusername/LAIA.git
 cd LAIA
 pip install -r requirements.txt
+```
+
+### 1.X Better approach
+Pull an image from Nvidia with CUDA preinstalled with Ubuntu 22.04. Install PyTorch with CUDA, Llamacpp with CUDA support and relevant packages from requirements. It's a bit tricky to setup but carries a huge learning curve.
+
+Copy or clone the code inside the container and the steps to run the code remains the same.
 
 ### 2. Starting the Server
 
@@ -104,11 +119,26 @@ Launch the server, Redis, and the worker in separate terminals:
     ```bash
     python3 worker.py
     ```
+5. **Modify client_ingest.py and client_infer.py to use the server**
+    ```bash
+    python3 client_ingest.py # If you want to use RAG
 
-### Better approach
-Pull an image from Nvidia with CUDA preinstalled with Ubuntu 22.04. Install PyTorch with CUDA, Llamacpp with CUDA support and relevant packages from requirements. It's a bit tricky to setup but carries a huge learning curve.
+    python3 client_infer.py # Enable/Disable RAG and Websearch tool
+    ```
 
-Copy the code inside the container and the steps to run the code remains the same.
+## 2. Usage
+
+Make sure you get your own Serper api key from [Serper's site](https://serper.dev/) to use Web Search tool.
+Create a .env file in the project folder and paste it like
+```bash
+SERPER_API_KEY=your_api_key_here
+```
+
+client_ingest.py - If you want to use RAG with your PDF, you can run this code first which will ingest your data to a Vector database and return a PDF RAG Tool against your user id.
+
+client_infer.py - You can modify the payload value and turn on/off the RAG and web search tool.
+
+NOTE - Your PDF RAG Tool is saved against your user id. Make sure you have same user id in Ingest and Infer.
 
 ---
 
