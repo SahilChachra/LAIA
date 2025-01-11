@@ -1,12 +1,12 @@
-# LAIA - Language AI Advisor 📚🤖
+# MoLaD - Modular Language Advisor 📚🤖
 
-Welcome to **LAIA** (Language AI Advisor), your modular AI companion!
+Welcome to **MoLaD** (Modular Language Advisor), your modular AI companion!
 
 ---
 
 ## 📋 Description
 
-LAIA (Language AI Advisor) is a modular server built using Large Language Models (LLMs) with tools for PDF-based Retrieval-Augmented Generation (RAG), web search, and conversation history management. The project aims to create a flexible and scalable framework for integrating various AI tools as needed.
+MoLaD (Modular Language Advisor) is a modular server built using Large Language Models (LLMs) with tools for PDF-based Retrieval-Augmented Generation (RAG), web search, and conversation history management. The project aims to create a flexible and scalable framework for integrating various AI tools as needed.
 
 ## 💡 Design Philosophy
 
@@ -16,15 +16,15 @@ The goal behind this project was to build an **LLM server with custom agents** t
 2. **Modular Architecture**: The code is structured to be as modular as possible, allowing it to serve as a foundational base for similar projects or future extensions.  
 3. **Built from Scratch**: While many open-source libraries exist, this project was built independently to ensure that individual components can function autonomously, promoting scalability and reusability.
 
-This approach ensures that LAIA is not only powerful but also extensible, encouraging innovation and customization.
+This approach ensures that MoLaD is not only powerful but also extensible, encouraging innovation and customization.
 
 ---
 
 ## 🌠 Screenshots
 
-![Screenshot 1](https://github.com/SahilChachra/LAIA/blob/main/images/LAIA_SS_1.png)
+![Screenshot 1](https://github.com/SahilChachra/MoLaD/blob/main/images/MoLaD_SS_1.png)
 
-![Screenshot 2](https://github.com/SahilChachra/LAIA/blob/main/images/LAIA_SS_2.png)
+![Screenshot 2](https://github.com/SahilChachra/MoLaD/blob/main/images/MoLaD_SS_2.png)
 
 
 ---
@@ -44,14 +44,14 @@ This approach ensures that LAIA is not only powerful but also extensible, encour
 3. **SmolLMv2-360M-instruct**: Lightweight LLM used to filter and select relevant outputs from **ChromaDB** and also to summarize data.  
 4. **BAAI/bge-small-en**: Cross-encoder used for re-ranking documents for precision in final outputs.  
 ### Model path
-I had place the Llama-3.2-3B-instruct model in the parent folder of LAIA. You can do the same or update the path in ```worker.py```'s main() accordingly. 
+I had place the Llama-3.2-3B-instruct model in the parent folder of MoLaD. You can do the same or update the path in ```worker.py```'s main() accordingly. 
 
 ---
 
 ## 🚀 Key Features
 
 1. **Advanced RAG with Multi-Level Filtering**:  
-   LAIA uses a robust three-step document retrieval process:  
+   MoLaD uses a robust three-step document retrieval process:  
    - **Cosine Similarity**: Quickly fetches the most relevant documents from the **ChromaDB** vector database.  
    - **LLMChainFilter**: Filters out irrelevant documents using the **SmolLMv2-360M-instruct model**, ensuring only relevant content reaches the next stage.  
    - **Cross-Encoder Reranker**: Re-ranks documents for precision using **BAAI/bge-small-en**, fine-tuning results for accuracy.  
@@ -73,10 +73,10 @@ I had place the Llama-3.2-3B-instruct model in the parent folder of LAIA. You ca
 ## 📊 Flow Charts (Built using [lucid.app](lucid.app))
 
 ### Web Seach Flow
-![Web Search flow](https://github.com/SahilChachra/LAIA/blob/main/images/WebSearchToolFlowChart.png)
+![Web Search flow](https://github.com/SahilChachra/MoLaD/blob/main/images/WebSearchToolFlowChart.png)
 
 ### RAG flow
-![RAG flow](https://github.com/SahilChachra/LAIA/blob/main/images/RAGFlow.png)
+![RAG flow](https://github.com/SahilChachra/MoLaD/blob/main/images/RAGFlow.png)
 
 
 ## 🛠️ Technologies Used
@@ -84,7 +84,7 @@ I had place the Llama-3.2-3B-instruct model in the parent folder of LAIA. You ca
 - **[Langchain](https://github.com/hwchase17/langchain)**: Framework for building LLM applications.  
 - **[ChromaDB](https://docs.trychroma.com/)**: Manages and retrieves vectorized document embeddings for RAG.  
 - **[Redis](https://redis.io/)**: Enables efficient multi-user support and batch processing.  
-- **[FastAPI](https://fastapi.tiangolo.com/)**: High-performance API framework for serving LAIA.  
+- **[FastAPI](https://fastapi.tiangolo.com/)**: High-performance API framework for serving MoLaD.  
 - **[Gunicorn](https://gunicorn.org/)**: Python WSGI server for deploying the application.
 
 ---
@@ -95,8 +95,8 @@ I had place the Llama-3.2-3B-instruct model in the parent folder of LAIA. You ca
 Clone this repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/yourusername/LAIA.git
-cd LAIA
+git clone https://github.com/SahilChachra/MoLaD.git
+cd MoLaD
 pip install -r requirements.txt
 ```
 
