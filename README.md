@@ -70,7 +70,7 @@ I had place the Llama-3.2-3B-instruct model in the parent folder of LAIA. You ca
 
 ---
 
-## Flow Charts (Built using [lucid.app](lucid.app))
+## 📊 Flow Charts (Built using [lucid.app](lucid.app))
 
 ### Web Seach Flow
 ![Web Search flow](https://github.com/SahilChachra/LAIA/blob/main/images/WebSearchToolFlowChart.png)
